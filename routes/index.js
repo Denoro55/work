@@ -3,9 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 
-var User = require('../server/models/post').User;
-var Post = require('../server/models/post').Post;
-var Pic = require('../server/models/post').Pic;
+var User = require('../server/models/Post').User;
+var Post = require('../server/models/Post').Post;
+var Pic = require('../server/models/Post').Pic;
 
 const formidable = require('formidable');
 const fs = require('fs-extra');
