@@ -26,7 +26,7 @@ router.get('/mypage', function(req, res, next) {
         res.render('index', { title: 'Express' , name: 'Гость' });
     }
 });
-// 
+
 // router.get('/login', function(req, res, next) {
 //     res.render('index');
 // });
@@ -39,16 +39,9 @@ router.post('/uploadavatar', function(req, res, next) {
 
     if (req.session.own){
 
-         console.log('upload 2')
-
         var namedir, currpath;
 
         User.findById(req.session.user,function(err,user){
-
-
-            console.log('upload 3')
-
-            console.log('cookie: ',user.name)
 
             var dir = config.upload;
             
@@ -67,57 +60,92 @@ router.post('/uploadavatar', function(req, res, next) {
                 })
             }
 
-            console.log('upload 4')
-
             fs.mkdirs(currpath,function(err){
-
-                console.log('upload 5')
-
-                var filename;
 
                 let form = new formidable.IncomingForm();
                 form.uploadDir = path.join(process.cwd(),currpath);
 
-                // form.parse(req);
-
                 form.parse(req,function(err,fields,file){
 
-                    console.log('upload 6 '+file.file.name)
-                    filename = file.file.name;
-
-                    fs.rename(file.file.path,path.join(dir,namedir,file.file.name),function(err){
+                    fs.rename(file.photo.path,path.join(dir,namedir,file.photo.name),function(err){
                         if (err) {
-                            fs.unlink(path.join(dir, file.file.name)); 
-                            fs.rename(file.file.path, file.file.name);
+                            fs.unlink(path.join(dir, files.photo.name)); //
+                            fs.rename(files.photo.path, files.photo.name); //
                         }
-                    })
+                    });
 
                     dir = dir.substr(dir.indexOf('/'));
 
                     Pic.findOne({owner: user._id},function(err,c){
                         if (c){
-                            console.log('pic update')
-                            Pic.update({owner: user._id},{$set: {picture: path.join(dir,namedir,file.file.name),
-                             name: file.file.name, owner: user._id}},function(err,item){
+                            Pic.update({},{$set: {picture: path.join(dir,namedir,file.photo.name),
+                              name: file.photo.name, owner: user._id}},function(err,item){
                                 if (err) console.log(err);
                             })
                         } else {
-                            console.log('pic create')
                             Pic.create({
-                                name: file.file.name,
+                                name: fields.name,
                                 owner: user._id, 
-                                picture: path.join(dir,namedir,file.file.name)
+                                picture: path.join(dir,namedir,file.photo.name)
                             },function(err,item){
                                 if (err) console.log(err);
                             })
                         }
                     })
 
-                })
-
-                setTimeout(function(){
                     res.send('success');
-                },2000)            
+
+                })
+                
+            })
+
+            // fs.mkdirs(currpath,function(err){
+
+            //     var filename;
+
+            //     let form = new formidable.IncomingForm();
+            //     form.uploadDir = path.join(process.cwd(),currpath);
+
+            //     // form.parse(req);
+
+            //     form.parse(req,function(err,fields,file){
+
+            //         console.log('upload 6 '+file.file.name)
+            //         filename = file.file.name;
+
+            //         fs.rename(file.file.path,path.join(dir,namedir,file.file.name),function(err){
+            //             if (err) {
+            //                 fs.unlink(path.join(dir, file.file.name)); 
+            //                 fs.rename(file.file.path, file.file.name);
+            //             }
+            //         })
+
+            //         dir = dir.substr(dir.indexOf('/'));
+
+            //         Pic.findOne({owner: user._id},function(err,c){
+            //             if (c){
+            //                 console.log('pic update')
+            //                 Pic.update({owner: user._id},{$set: {picture: path.join(dir,namedir,file.file.name),
+            //                  name: file.file.name, owner: user._id}},function(err,item){
+            //                     if (err) console.log(err);
+            //                 })
+            //             } else {
+            //                 console.log('pic create')
+            //                 Pic.create({
+            //                     name: file.file.name,
+            //                     owner: user._id, 
+            //                     picture: path.join(dir,namedir,file.file.name)
+            //                 },function(err,item){
+            //                     if (err) console.log(err);
+            //                 })
+            //             }
+            //         })
+
+            //     })
+
+            //     setTimeout(function(){
+            //         res.send('success');
+            //     },2000)            
 
                 // form.on('fileBegin', function (name, file){
                 //     console.log('begin')
@@ -206,12 +234,8 @@ router.post('/uploadavatar', function(req, res, next) {
 
                 // })
 
-            })
-
         })
-
     }
-
 });
 
 // register

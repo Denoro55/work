@@ -61,6 +61,7 @@ class Register extends React.Component{
 	}
 
 	fileUpload(file){
+		console.log(file)
 		console.log('uploading ',window.location.origin+'/uploadavatar')
 		const url = window.location.origin+'/uploadavatar';
 		const formData = new FormData();
@@ -70,7 +71,7 @@ class Register extends React.Component{
 				'content-type': 'multipart/form-data'
 			}
 		}
-		// this.handleReset();
+		this.handleReset();
 		return post(url, formData,config)
 	}
 
@@ -157,7 +158,7 @@ class Register extends React.Component{
 							{this.state.preloader ? <img className="preloader" src='../../../images/preloader.gif' alt="" /> : null}
 						</div>
 						{ this.props.info.owner ? 
-						<form onSubmit={this.onFormSubmit} className="upload-account-photo form" id="upload" action="/uploadavatar" 
+						<form className="upload-account-photo form" id="upload" action="/uploadavatar" 
 						method="POST" encType="multipart/form-data">
 						    <label className="form__input-line">
 						    	<input ref={(e)=>this.imageName=e} className="form__input" name="name" type="text" 
