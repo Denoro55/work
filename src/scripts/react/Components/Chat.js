@@ -29,7 +29,7 @@ class Chat extends React.Component{
 
 			let currUrl = window.location.origin.replace('http:','');
 			// console.log(currUrl)
-			socket = io("ws://https://stark-inlet-52617.herokuapp.com", {transports: ['websocket']});
+			socket = io("wss://stark-inlet-52617.herokuapp.com", {transports: ['websocket']});
 			this.props.onGetMessages(socket);
 			this.props.onGetUsers(socket);
 			// this.props.onSendMessage(socket,{image: this.props.session.pic, name: this.props.session.name});
