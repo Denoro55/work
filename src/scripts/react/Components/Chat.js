@@ -27,7 +27,11 @@ class Chat extends React.Component{
 
 			connected = true;
 
-			socket = io('ws://localhost:3000', {transports: ['websocket']});
+			let currUrl = window.location.origin.replace('http:','');
+
+			console.log(currUrl)
+
+			socket = io('ws:'+currUrl, {transports: ['websocket']});
 			this.props.onGetMessages(socket);
 			this.props.onGetUsers(socket);
 			// this.props.onSendMessage(socket,{image: this.props.session.pic, name: this.props.session.name});

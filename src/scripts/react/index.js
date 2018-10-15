@@ -32,7 +32,7 @@ const history = syncHistoryWithStore(createHashHistory(),store);
 // store.dispatch(fetchSession());
 
 store.subscribe(()=>{
-	console.log(store.getState());
+	// console.log(store.getState());
 })
 
 ReactDOM.render(
