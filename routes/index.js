@@ -68,49 +68,83 @@ router.post('/uploadavatar', function(req, res, next) {
                 let form = new formidable.IncomingForm();
                 form.uploadDir = path.join(process.cwd(),currpath);
 
-                form.parse(req);
+                // form.parse(req);
 
-                form.on('fileBegin', function (name, file){
-                    console.log('begin')
-                    file.path = path.join(dir,namedir,file.name);
-                });
+                form.parse(req,function(err,fields,file){
 
-                form.on('progress', function(bytesReceived, bytesExpected) {
-                    var percent_complete = (bytesReceived / bytesExpected) * 100;
-                    console.log(percent_complete.toFixed(2));
-                });
+                    filename = file.file.name;
 
-                form.on('file', function (name, file){
-
-                    filename = file.name;
-
-                    console.log('Uploaded ' + file.name);
+                    fs.rename(file.file.path,path.join(dir,namedir,file.file.name),function(err){
+                        if (err) {
+                            fs.unlink(path.join(dir, file.file.name)); 
+                            fs.rename(file.file.path, file.file.name);
+                        }
+                    })
 
                     dir = dir.substr(dir.indexOf('/'));
 
-                    console.log('userid',user._id)
-
                     Pic.findOne({owner: user._id},function(err,c){
                         if (c){
-                            Pic.update({owner: user._id},{$set: {picture: path.join(dir,namedir,file.name), name: file.name, owner: user._id}},function(err,item){
+                            Pic.update({owner: user._id},{$set: {picture: path.join(dir,namedir,file.file.name),
+                             name: file.file.name, owner: user._id}},function(err,item){
                                 if (err) console.log(err);
                             })
                         } else {
                             Pic.create({
-                                name: file.name,
+                                name: file.file.name,
                                 owner: user._id, 
-                                picture: path.join(dir,namedir,file.name)
+                                picture: path.join(dir,namedir,file.file.name)
                             },function(err,item){
                                 if (err) console.log(err);
                             })
                         }
                     })
 
-                });
+                })
 
-                form.on('end', function() {
-                    res.send('success');
-                });
+                res.send('success');
+
+                // form.on('fileBegin', function (name, file){
+                //     console.log('begin')
+                //     file.path = path.join(dir,namedir,file.name);
+                // });
+
+                // form.on('progress', function(bytesReceived, bytesExpected) {
+                //     var percent_complete = (bytesReceived / bytesExpected) * 100;
+                //     console.log(percent_complete.toFixed(2));
+                // });
+
+                // form.on('file', function (name, file){
+
+                //     filename = file.name;
+
+                //     console.log('Uploaded ' + file.name);
+
+                //     dir = dir.substr(dir.indexOf('/'));
+
+                //     console.log('userid',user._id)
+
+                //     Pic.findOne({owner: user._id},function(err,c){
+                //         if (c){
+                //             Pic.update({owner: user._id},{$set: {picture: path.join(dir,namedir,file.name), name: file.name, owner: user._id}},function(err,item){
+                //                 if (err) console.log(err);
+                //             })
+                //         } else {
+                //             Pic.create({
+                //                 name: file.name,
+                //                 owner: user._id, 
+                //                 picture: path.join(dir,namedir,file.name)
+                //             },function(err,item){
+                //                 if (err) console.log(err);
+                //             })
+                //         }
+                //     })
+
+                // });
+
+                // form.on('end', function() {
+                //     res.send('success');
+                // });
 
                 // function fileSaved(){
                 //     if (fs.existsSync(path.join(dir,namedir,filename))){

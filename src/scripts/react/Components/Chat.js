@@ -22,14 +22,14 @@ class Chat extends React.Component{
 	}
 
 	connectSocket(){
-		console.log('connecting...')
+		// console.log('connecting...')
 		if (!connected){
 
 			connected = true;
 
 			let currUrl = window.location.origin.replace('http:','');
 
-			console.log(currUrl)
+			// console.log(currUrl)
 
 			socket = io('ws:'+currUrl, {transports: ['websocket']});
 			this.props.onGetMessages(socket);
@@ -38,7 +38,7 @@ class Chat extends React.Component{
 			socket.emit('hello',{image: this.props.session.pic, name: this.props.session.name})
 
 			socket.on('hello',function(data){
-				console.log(data);
+				// console.log(data);
 			})
 
 			// socket.on('users',function(data){
@@ -78,7 +78,7 @@ class Chat extends React.Component{
 			this.connectSocket();
 		}
 
-		console.log('render')
+		// console.log('render')
 
 		// if (this.myArea){
 		// 	this.myArea.scrollTop = this.myArea.scrollHeight;
@@ -165,7 +165,7 @@ const mapStateToProps = (state={}) => {
 const mapDispatchToProps = dispatch => {
 	return {
 		onSendMessage: (socket,data,name) => {
-			console.log(socket,data,name)
+			// console.log(socket,data,name)
 			dispatch(sendMessage(socket,data,name));
 		},
 		onGetMessages: (socket) => {
