@@ -92,8 +92,16 @@ router.post('/uploadavatar', function(req, res, next) {
                                 if (err) console.log(err);
                             })
                         }
+
                     })
 
+                })
+
+                form.on('end', function() {
+                    res.send('file has been saved!');
+                });
+
+            })
 
                         // var fileRename = new Promise((resolve,reject)=>{
                         //     fs.rename(file.photo.path,path.join(dir,namedir,file.photo.name),function(err){
@@ -130,15 +138,8 @@ router.post('/uploadavatar', function(req, res, next) {
                         
 
                     // })
-
-                })
-
-                form.on('end', function() {
-                    res.send('file has been saved!');
-                });
-
                 
-            })
+        })
 
             // fs.mkdirs(currpath,function(err){
 
@@ -274,9 +275,8 @@ router.post('/uploadavatar', function(req, res, next) {
                 // });
 
                 // })
-
-        })
     }
+
 });
 
 // register
