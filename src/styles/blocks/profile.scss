@@ -1,0 +1,78 @@
+.main-title{
+	margin: 0;
+}
+.title-block{
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	margin: 20px 0;
+	margin-bottom: 60px;
+}
+.profile{
+	display: flex;
+	margin-bottom: 25px;
+	margin-top: 30px;
+	padding: 0 20px;
+	font-size: 18px;
+	button{
+		font-size: 18px;
+	}
+	a{
+		font-size: 22px;
+	}
+}
+.profile__left{
+	width: 400px;
+	flex-shrink: 0;
+}
+.profile__right{
+	flex: 1;
+	margin-left: 	20px;
+	min-width: 0;
+}
+.profile-name{
+	margin-bottom: 20px;
+	font-size: 1.3em;
+}
+.profile-image{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: 5px;
+	img{
+		width: auto;
+		max-width: 100%;
+		max-height: 300px;
+
+		// border-radius: 50%;
+	}
+}
+.profile-main{
+	margin-bottom: 25px;
+}
+.create-post-form{
+	input,textarea{
+		width: 100%;
+		border: 0;
+		padding: 8px 10px;
+		font-family: Arial;
+		font-weight: 300;
+		border-radius: 5px;
+	}
+	.input-title{
+		margin-bottom: 10px;
+	}
+}
+.upload-account-photo{
+	font-size: 18px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+}
+.form__btns{
+	margin-left: auto;
+}
+.form-controls-bottom{
+	margin-top: 15px;
+}

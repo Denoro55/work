@@ -1,0 +1,8 @@
+@font-face{
+	font-family: 'mister';
+	src: url('../fonts/MisterEarlBT.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@import "blocks/**/*.scss";

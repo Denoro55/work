@@ -1,0 +1,51 @@
+.upload-block{
+    overflow: hidden;
+    text-align: center;
+}
+.upload-label{
+    display: inline-block;
+    padding: 8px 10px;
+    padding-left: 0;
+    white-space: nowrap;
+    outline: none;
+}
+.upload-label:hover{
+    cursor: pointer;
+}
+
+
+.inputfile {
+    /* visibility: hidden etc. wont work */
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    outline: none;
+}
+.inputfile:focus + label {
+  /* keyboard navigation */
+  /*outline: 1px dotted #000;*/
+  /*outline: -webkit-focus-ring-color auto 5px;*/
+}
+.inputfile + label * {
+    pointer-events: none;
+}
+.loaded-pic{
+    margin-left: 15px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.status{
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px;
+    padding-left: 5px;
+}

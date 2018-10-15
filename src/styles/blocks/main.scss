@@ -1,0 +1,112 @@
+// @import url('https://fonts.googleapis.com/css?family=Russo+One');
+@import url('https://fonts.googleapis.com/css?family=Signika+Negative');
+
+$family: 'Signika Negative', sans-serif;
+
+body{
+	background: radial-gradient(circle at 100%,#002bff,#2cdcbb 50%,#bed6e0 55%,#0083ff 75%);
+	// font-family: 'mister';
+	font-family: $family;
+	text-align: center;
+	color: white;
+	font-size: 	24px;
+	text-shadow: 0 3px 3px black;
+	font-weight: 600;
+	// animation: animateBackground 3s linear infinite;
+}
+a,button{
+	font-family: $family;
+	color: white;
+	font-size: 	24px;
+	text-shadow: 0 3px 3px black;
+	font-weight: 600;
+}
+html,body{
+	min-height: 100%;
+}
+@keyframes animateBackground{
+	0%{
+		background: aqua;
+	}
+	50%{
+		background: orange;
+	}
+	100%{
+		background: aqua;
+	}
+}
+a{
+	text-decoration: none;
+	color: white;
+	padding: 3px 0;
+	&:hover{
+		cursor: pointer;
+	}
+}
+*{
+	box-sizing: border-box;
+}
+ul{
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+	padding: 0;
+}
+textarea{
+	resize: none;
+}
+input,textarea{
+	display: block;
+	padding: 10px 10px;
+	border: 0;
+	border-radius: 5px;
+	font-weight: 600;
+	color: lighten(black,20);
+	outline: 0;
+}
+button,.back-link{
+	color: white;
+	border: 0;
+	background: none;
+	&:focus{
+		outline: 0;
+	}
+}
+button{
+	&:hover{
+		cursor: pointer;
+	}
+}
+
+.back-link{
+	margin-top: 20px;
+	// margin-left: 35px;
+}
+.page-name{
+	margin-bottom: 0;
+}
+.input-title{
+	margin-bottom: 10px;
+}
+.menu__list{
+	padding-left: 0;
+	list-style: none;
+	li{
+		margin-bottom: 5px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+.input-text{
+	border: 0;
+	padding: 5px;
+	margin-right: 15px;
+	margin-bottom: -7px;
+}
+.skill-list{
+	display: flex;
+	div{
+		margin-left: 10px;
+	}
+}
