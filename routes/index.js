@@ -63,6 +63,7 @@ router.post('/uploadavatar', function(req, res, next) {
             fs.mkdirs(currpath,function(err){
 
                 let form = new formidable.IncomingForm();
+
                 form.uploadDir = path.join(process.cwd(),currpath);
 
                 form.parse(req,function(err,fields,file){
@@ -84,7 +85,7 @@ router.post('/uploadavatar', function(req, res, next) {
                             })
                         } else {
                             Pic.create({
-                                name: fields.name,
+                                name: file.photo.name,
                                 owner: user._id, 
                                 picture: path.join(dir,namedir,file.photo.name)
                             },function(err,item){

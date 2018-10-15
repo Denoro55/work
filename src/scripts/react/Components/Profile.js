@@ -135,9 +135,17 @@ class Register extends React.Component{
 			image = <img 
 			onError={this.onError.bind(this)} 
 			onLoad={this.preloaderOff.bind(this)}
-			src={`/images/upload/${this.props.userID}/${this.props.info.pic}?${this.state.imageHash}`} alt=""/> 
+			src={`/images/upload/${this.props.userID}/${this.props.info.pic}`} alt=""/> 
 			: image = null
 		}
+
+		// { this.props.info ? 
+		// 	image = <img 
+		// 	onError={this.onError.bind(this)} 
+		// 	onLoad={this.preloaderOff.bind(this)}
+		// 	src={`/images/upload/${this.props.userID}/${this.props.info.pic}?${this.state.imageHash}`} alt=""/> 
+		// 	: image = null
+		// }
 		
 		return(
 			<div>
