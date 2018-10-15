@@ -35,12 +35,18 @@ router.get('/mypage', function(req, res, next) {
 
 router.post('/uploadavatar', function(req, res, next) {
 
+    console.log('upload 1')
+
     if (req.session.own){
+
+         console.log('upload 2')
 
         var namedir, currpath;
 
         User.findById(req.session.user,function(err,user){
 
+
+            console.log('upload 3')
 
             console.log('cookie: ',user.name)
 
@@ -61,7 +67,11 @@ router.post('/uploadavatar', function(req, res, next) {
                 })
             }
 
+            console.log('upload 4')
+
             fs.mkdirs(currpath,function(err){
+
+                 console.log('upload 5')
 
                 var filename;
 
