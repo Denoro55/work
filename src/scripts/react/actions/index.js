@@ -119,6 +119,7 @@ export const createPost = ({ title, body }) => {
   return (dispatch) => {
     return axios.post(`${apiUrl}/posts/add`, {title, body})
       .then(response => {
+        console.log('create post')
         dispatch(createPostSuccess(response.data))
       })
       .catch(error => {
@@ -172,7 +173,7 @@ export const fetchAllPosts = (id) => {
   return (dispatch) => {
     return axios.get(`${apiUrl}/posts/${id}`)
       .then(response => {
-        // console.log()
+        console.log('fetch posts')
         dispatch(fetchPosts(response.data))
       })
       .catch(error => {

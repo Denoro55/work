@@ -14,6 +14,7 @@ const masonryOptions = {
 };
 
 function PostList({ posts, onDelete }) {
+  console.log('post list')
   if(!posts.length) {
     return (
       <div>

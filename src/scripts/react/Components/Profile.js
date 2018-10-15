@@ -50,6 +50,7 @@ class Register extends React.Component{
 	}
 
 	onFormSubmit(e){
+		console.log('submit')
 		e.preventDefault() // Stop form submit
 		this.fileUpload(this.state.file).then((response)=>{
 			console.log('getting new picture')
@@ -60,7 +61,7 @@ class Register extends React.Component{
 	}
 
 	fileUpload(file){
-		console.log(window.location.origin+'/uploadavatar')
+		console.log('uploading ',window.location.origin+'/uploadavatar')
 		const url = window.location.origin+'/uploadavatar';
 		const formData = new FormData();
 		formData.append('file',file)
@@ -69,7 +70,7 @@ class Register extends React.Component{
 				'content-type': 'multipart/form-data'
 			}
 		}
-		this.handleReset();
+		// this.handleReset();
 		return post(url, formData,config)
 	}
 
