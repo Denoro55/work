@@ -96,7 +96,7 @@ router.post('/uploadavatar', function(req, res, next) {
 
                     // res.status(302);
                     // res.setHeader('Location','/');
-                    res.end();
+                    res.send('success');
 
                 })
                 
