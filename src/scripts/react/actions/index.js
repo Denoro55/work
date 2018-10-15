@@ -14,7 +14,7 @@ export const sendMessage = (socket,data,name) => {
 export const getMessage = (socket) => {
     return (dispatch) => {
         socket.on('message',res => {
-            console.log(res)
+            // console.log(res)
             dispatch(addItem(res))
         })   
     };
@@ -23,7 +23,7 @@ export const getMessage = (socket) => {
 export const getUser = (socket) => {
     return (dispatch) => {
         socket.on('users',res => {
-          console.log(res)
+          // console.log(res)
             dispatch({type: res.type,users: res.users})
         })   
     };
@@ -48,10 +48,10 @@ export const exitSession = () => {
 
 export const fetchInfo = (name) => {
     return (dispatch) => {
-    console.log(`${apiUrl}/userinfo/${name}`)
+    // console.log(`${apiUrl}/userinfo/${name}`)
     return axios.get(`${apiUrl}/userinfo/${name}`)
         .then(response => {
-            console.log(response)
+            // console.log(response)
             dispatch({type: 'USER_INFO', info: response.data})
             dispatch(fetchPosts(response.data.posts))
         })
@@ -75,6 +75,7 @@ export const createUser = ({name,password}) => {
 };
 
 export const uploadPhoto = ({file}) => {
+    console.log('uploading on',apiUrl)
     const formData = new FormData();
     formData.append('file',file);
     const config = {
@@ -83,13 +84,12 @@ export const uploadPhoto = ({file}) => {
         }
     }
     return (dispatch) => {
-
         return axios.post(`${apiUrl}/uploadavatar`,formData,config)
         .then(response => {
             dispatch({type: 'USER_INFO', info: response.data})
         })
         .catch(error => {
-            console.log(response)
+            // console.log(response)
             throw(error);
         });
     };
@@ -100,7 +100,7 @@ export const loginUser = ({name,password}) => {
     return (dispatch) => {
         return axios.post(`${apiUrl}/login`, {name,password})
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             let setColor = 'red';
             if (response.data.value!='Failed'){
                 setColor = 'green';
@@ -128,7 +128,7 @@ export const createPost = ({ title, body }) => {
 };
 
 export const createPostSuccess =  (data) => {
-  console.log(data)
+  // console.log(data)
   return {
     type: ADD_POST,
     payload: {
@@ -168,11 +168,11 @@ export const fetchPosts = (posts) => {
 };
 
 export const fetchAllPosts = (id) => {
-  console.log(`${apiUrl}/posts/${id}`)
+  // console.log(`${apiUrl}/posts/${id}`)
   return (dispatch) => {
     return axios.get(`${apiUrl}/posts/${id}`)
       .then(response => {
-        console.log()
+        // console.log()
         dispatch(fetchPosts(response.data))
       })
       .catch(error => {

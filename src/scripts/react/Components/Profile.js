@@ -60,8 +60,8 @@ class Register extends React.Component{
 	}
 
 	fileUpload(file){
-		console.log(file)
-		const url = 'http://localhost:3000/uploadavatar';
+		console.log(window.location.origin+'/uploadavatar')
+		const url = window.location.origin+'/uploadavatar';
 		const formData = new FormData();
 		formData.append('file',file)
 		const config = {
