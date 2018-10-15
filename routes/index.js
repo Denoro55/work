@@ -63,48 +63,79 @@ router.post('/uploadavatar', function(req, res, next) {
             fs.mkdirs(currpath,function(err){
 
                 let form = new formidable.IncomingForm();
+
+                form.parse(req);
+
                 form.uploadDir = path.join(process.cwd(),currpath);
 
-                form.parse(req,function(err,fields,file){
+                form.on('fileBegin', function(name,file){
+                    //rename the incoming file to the file's name
+                    file.path = form.uploadDir + "/" + file.name;
+                })
 
-                    var fileRename = new Promise((resolve,reject)=>{
-                        fs.rename(file.photo.path,path.join(dir,namedir,file.photo.name),function(err){
-                            console.log('step 1')
-                            resolve();
-                            // if (err) {
-                            //     fs.unlink(path.join(dir, files.photo.name)); //
-                            //     fs.rename(files.photo.path, files.photo.name); //
-                            // }
-                        });
+                form.on('file', function(field,file) {
+
+                    dir = dir.substr(dir.indexOf('/'));
+
+                    Pic.findOne({owner: user._id},function(err,c){
+                        if (c){
+                            Pic.update({},{$set: {picture: path.join(dir,namedir,file.name),
+                              name: file.name, owner: user._id}},function(err,item){
+                                if (err) console.log(err);
+                            })
+                        } else {
+                            Pic.create({
+                                name: file.name,
+                                owner: user._id, 
+                                picture: path.join(dir,namedir,file.name)
+                            },function(err,item){
+                                if (err) console.log(err);
+                            })
+                        }
                     })
 
-                    fileRename.then(function(){
 
-                        console.log('step 2')
-                        dir = dir.substr(dir.indexOf('/'));
+                        // var fileRename = new Promise((resolve,reject)=>{
+                        //     fs.rename(file.photo.path,path.join(dir,namedir,file.photo.name),function(err){
+                        //         console.log('step 1')
+                        //         resolve();
+                        //         // if (err) {
+                        //         //     fs.unlink(path.join(dir, files.photo.name)); //
+                        //         //     fs.rename(files.photo.path, files.photo.name); //
+                        //         // }
+                        //     });
+                        // })
 
-                        Pic.findOne({owner: user._id},function(err,c){
-                            if (c){
-                                Pic.update({},{$set: {picture: path.join(dir,namedir,file.photo.name),
-                                  name: file.photo.name, owner: user._id}},function(err,item){
-                                    if (err) console.log(err);
-                                })
-                            } else {
-                                Pic.create({
-                                    name: file.photo.name,
-                                    owner: user._id, 
-                                    picture: path.join(dir,namedir,file.photo.name)
-                                },function(err,item){
-                                    if (err) console.log(err);
-                                })
-                            }
-                        })
+                    //         console.log('step 2')
 
-                        res.send('file has been saved!');
+                    //         dir = dir.substr(dir.indexOf('/'));
 
-                    })
+                    //         Pic.findOne({owner: user._id},function(err,c){
+                    //             if (c){
+                    //                 Pic.update({},{$set: {picture: path.join(dir,namedir,file.photo.name),
+                    //                   name: file.photo.name, owner: user._id}},function(err,item){
+                    //                     if (err) console.log(err);
+                    //                 })
+                    //             } else {
+                    //                 Pic.create({
+                    //                     name: file.photo.name,
+                    //                     owner: user._id, 
+                    //                     picture: path.join(dir,namedir,file.photo.name)
+                    //                 },function(err,item){
+                    //                     if (err) console.log(err);
+                    //                 })
+                    //             }
+                    //         })
+                            
+                        
+
+                    // })
 
                 })
+
+                form.on('end', function() {
+                    res.send('file has been saved!');
+                });
 
                 
             })
