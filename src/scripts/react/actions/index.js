@@ -3,7 +3,7 @@
 import { ADD_POST, DELETE_POST, FETCH_POST } from './types';
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:3000';
+const apiUrl = window.location.origin;
 
 export const sendMessage = (socket,data,name) => {
     return (dispatch) => {

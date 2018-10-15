@@ -22,17 +22,17 @@ var port = normalizePort(process.env.PORT || '3000');
 var io = socket.listen(app.listen(port));
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+    var port = parseInt(val, 10);
 
-  if (isNaN(port)) {
+    if (isNaN(port)) {
     return val;
-  }
+    }
 
-  if (port >= 0) {
+    if (port >= 0) {
     return port;
-  }
+    }
 
-  return false;
+    return false;
 }
 
 // var app = express();
