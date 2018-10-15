@@ -119,6 +119,8 @@ class Register extends React.Component{
 
 	render(){
 
+		console.log('render')
+
 		if (this.props.info.name){
 			if (this.props.userID != this.props.info.name){
 				this.props.onGetInfo(this.props.userID);

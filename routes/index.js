@@ -71,7 +71,7 @@ router.post('/uploadavatar', function(req, res, next) {
 
             fs.mkdirs(currpath,function(err){
 
-                 console.log('upload 5')
+                console.log('upload 5')
 
                 var filename;
 
@@ -81,6 +81,8 @@ router.post('/uploadavatar', function(req, res, next) {
                 // form.parse(req);
 
                 form.parse(req,function(err,fields,file){
+
+                    console.log('upload 6 '+file.file.name)
 
                     filename = file.file.name;
 
@@ -95,11 +97,13 @@ router.post('/uploadavatar', function(req, res, next) {
 
                     Pic.findOne({owner: user._id},function(err,c){
                         if (c){
+                            console.log('pic update')
                             Pic.update({owner: user._id},{$set: {picture: path.join(dir,namedir,file.file.name),
                              name: file.file.name, owner: user._id}},function(err,item){
                                 if (err) console.log(err);
                             })
                         } else {
+                            console.log('pic create')
                             Pic.create({
                                 name: file.file.name,
                                 owner: user._id, 
@@ -111,6 +115,8 @@ router.post('/uploadavatar', function(req, res, next) {
                     })
 
                 })
+
+                console.log('upload 7')
 
                 res.send('success');
 
