@@ -96,6 +96,7 @@ export const uploadPhoto = ({file}) => {
 };
 
 export const loginUser = ({name,password}) => {
+  console.log(apiUrl);
     return (dispatch) => {
         return axios.post(`${apiUrl}/login`, {name,password})
         .then(response => {
