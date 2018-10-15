@@ -83,7 +83,6 @@ router.post('/uploadavatar', function(req, res, next) {
                 form.parse(req,function(err,fields,file){
 
                     console.log('upload 6 '+file.file.name)
-
                     filename = file.file.name;
 
                     fs.rename(file.file.path,path.join(dir,namedir,file.file.name),function(err){
@@ -116,9 +115,9 @@ router.post('/uploadavatar', function(req, res, next) {
 
                 })
 
-                console.log('upload 7')
-
-                res.send('success');
+                setTimeout(function(){
+                    res.send('success');
+                },2000)            
 
                 // form.on('fileBegin', function (name, file){
                 //     console.log('begin')
