@@ -1,7 +1,7 @@
 {
     "apiPrefix": "http://localhost:8080",
     "serverPort": "8080",
-    "upload": "src/images/upload",
+    "upload": "dist/assets/images/upload",
     "db":{
         "name": "notes",
         "host": "localhost",

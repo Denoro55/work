@@ -121,7 +121,7 @@ gulp.task('watch', function () {
   gulp.watch('./src/styles/**/*.scss', gulp.series("sass"));
   gulp.watch(`./src/scripts/**/*.js*`, gulp.series("js"));
   gulp.watch(`./src/*.pug*`, gulp.series("pug"));
-  gulp.watch(`${src}images/**/*`, gulp.series("img:copy"));
+  // gulp.watch(`${src}images/**/*`, gulp.series("img:copy"));
 });
 
 // gulp.task("serve", () => {
