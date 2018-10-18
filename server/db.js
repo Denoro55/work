@@ -9,7 +9,9 @@ const Note = mongoose.model('Note');
 module.exports =  {
 
 	setUpConnection: function(){
-		mongoose.connect(`mongodb://denisor:195411den!@ds011412.mlab.com:11412/tester`);
+		mongoose.connect(`mongodb://localhost/test`);
+
+		// mongoose.connect(`mongodb://denisor:195411den!@ds011412.mlab.com:11412/tester`);
 		
 		// mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.name}`);
 	},
