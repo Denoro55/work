@@ -53,6 +53,10 @@ class Chat extends React.Component{
 			connected = false;
 		}
    	}
+
+   	componentDidUpdate(){
+   		this.myArea.scrollTop = this.myArea.scrollHeight;
+   	}
    	
 	handleSubmit(e){
 		e.preventDefault();

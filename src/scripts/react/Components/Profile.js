@@ -135,17 +135,9 @@ class Register extends React.Component{
 			image = <img 
 			onError={this.onError.bind(this)} 
 			onLoad={this.preloaderOff.bind(this)}
-			src={`/images/upload/${this.props.userID}/${this.props.info.pic}`} alt=""/> 
+			src={`/images/upload/${this.props.userID}/${this.props.info.pic}?${this.state.imageHash}`} alt=""/> 
 			: image = null
 		}
-
-		// { this.props.info ? 
-		// 	image = <img 
-		// 	onError={this.onError.bind(this)} 
-		// 	onLoad={this.preloaderOff.bind(this)}
-		// 	src={`/images/upload/${this.props.userID}/${this.props.info.pic}?${this.state.imageHash}`} alt=""/> 
-		// 	: image = null
-		// }
 		
 		return(
 			<div>
@@ -166,7 +158,7 @@ class Register extends React.Component{
 							{this.state.preloader ? <img className="preloader" src='../../../images/preloader.gif' alt="" /> : null}
 						</div>
 						{ this.props.info.owner ? 
-						<form className="upload-account-photo form" id="upload" action="/uploadavatar" 
+						<form onSubmit={this.onFormSubmit} className="upload-account-photo form" id="upload" action="/uploadavatar" 
 						method="POST" encType="multipart/form-data">
 						    <label className="form__input-line">
 						    	<input ref={(e)=>this.imageName=e} className="form__input" name="name" type="text" 
