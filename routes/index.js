@@ -79,7 +79,7 @@ router.post('/uploadavatar', function(req, res, next) {
 
                     Pic.findOne({owner: user._id},function(err,c){
                         if (c){
-                            Pic.update({},{$set: {picture: path.join('images/upload',namedir,file.name),
+                            Pic.update({owner: user._id},{$set: {picture: path.join('images/upload',namedir,file.name),
                               name: file.name, owner: user._id}},function(err,item){
                                 if (err) console.log(err);
                             })
